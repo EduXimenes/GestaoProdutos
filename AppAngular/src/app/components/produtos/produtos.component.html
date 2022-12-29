@@ -1,0 +1,90 @@
+<div class="container p-4">
+  <div class=" border border-light rounded p-3 text-center">
+    <h1>Gestão de Produtos</h1>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="ExibirFormularioCadastro()"> Adicionar Novo Produto
+    </button>
+  </div>
+</div>
+<hr />
+
+<table class="table table-striped table-over table-sm">
+  <tr class="thead-light"></tr>
+</table>
+
+
+<div style=" display: flex; justify-content: center;" *ngIf="visibilidadeTabela">
+  <ag-grid-angular [rowData]="rowData$ | async" [columnDefs]="colDefs" class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef" [getRowId]="getRowId" [rowSelection]="'multiple'" [animateRows]="true"
+    [pagination]="true" [paginationAutoPageSize]="true"
+    style=" justify-content: center; align-items:center;height: 700px; width: 70%">
+  </ag-grid-angular>
+</div>
+
+<div style=" display: flex; justify-content: center;" class="container-lg p-5" *ngIf="visibilidadeFormulario">
+  <div class="row">
+    <div class="border-light rounded p-5 shadow" style="min-width: 520px;" *ngIf="form">
+      <h6>{{title}}</h6>
+      <hr />
+
+      <form [formGroup]="form" (ngSubmit)="EnviarFormulario()">
+        <div class="form-group mb-3">
+          <label>Descrição do Produto*</label>
+          <input type="text" class="form-control form-control-sm " formControlName="DescProduto" />
+        </div>
+
+        <div class="form-group flex">
+          <label>Situação</label>
+          <input type="text" class="form-control form-control-sm " formControlName="Situacao"
+            placeholder="Ativo/Inativo" />
+
+          <!-- <input type="radio" id="Ativo" class="form-control form-control-sm" formControlName="Situacao" />
+          <label for="Ativo">Ativo</label><br>
+          <input type="radio" id="Inativo" class="form-control form-control-sm" formControlName="Situacao" />
+          <label for="Inativo">Inativo</label><br> -->
+
+        </div>
+
+        <div class="form-group">
+          <label>Data Fabricação</label>
+          <input type="text" class="form-control form-control-sm" formControlName="DtFabricacao" id="dataFabricacao"
+            placeholder="yyyy-MM-dd" />
+        </div>
+
+        <div class="form-group">
+          <label>Data Validade</label>
+          <input type="text" class="form-control form-control-sm" formControlName="DtValidade" id="dataValidade"
+            placeholder="yyyy-MM-dd" />
+        </div>
+
+        <div class="form-group">
+          <label>Código Fornecedor</label>
+          <input type="number" class="form-control form-control-sm" formControlName="CodFornecedor" />
+        </div>
+
+        <div class="form-group">
+          <label>Descrição Fornecedor</label>
+          <input type="text" class="form-control form-control-sm" formControlName="DescFornecedor" />
+        </div>
+
+        <div class="form-group">
+          <label>CNPJ</label>
+          <input type="text" class="form-control form-control-sm" formControlName="CNPJ" />
+        </div>
+        <div class="container">
+          <div class="row">
+            <div>
+              <button (click)="testeData$" type="submit" class="btn btn-sm btn-outline-secondary">
+                Salvar
+              </button>
+            </div>
+            <div class="pl-1">
+              <button type="button" class="btn btn-sm btn-light" (click)="Voltar()">
+                Voltar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
